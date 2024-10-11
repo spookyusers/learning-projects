@@ -14,9 +14,11 @@ llms with matlab - ollama doc)
 
 ## Set up Ollama Server
 
-```matlab
+```
 curl -fsSL https://ollama.com/install.sh | sh
 ```
+I did this in terminal. No issues.
+![ollama install](~/ollama-install-kym.png)
 
 ## Pull Model into Server
 

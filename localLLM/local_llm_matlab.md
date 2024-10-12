@@ -24,7 +24,9 @@ I did this in terminal. No issues.
 ```matlab
 ollama pull llama3
 ```
-Can also pull llama2, codellama, phi3, mistral, gemma (probably others).
+- Did this in terminal as well. Went fine. Can also pull llama2, codellama, phi3, mistral, gemma (probably others).
+- For the following parts, I assume I do all of it in MATLAB. I'm running on Ubuntu and just using matlab -nodesktop so hopefully this goes well.
+
 
 ## Initialize Chat for RAG (Retrieval Augmented Generation)
 
@@ -79,6 +81,7 @@ document = preprocessDocuments(str);
 - Tokenize query and find similarity scores between query and document
 ```
 embQuery = bm25Similarity(document, tokenizedDocument(query_tech));
+```
 
 - Sort docs in descending order of similarity scores
 ```

@@ -1,30 +1,60 @@
-# Creating a local LLM following a guide 
+# Local LLM with Ollama and MATLAB
 
 ## Links and Resources
 
 "Local LLM's with MATLAB" by Sivylla Paraskevopoulou
-[https://blogs.mathworks.com/deep-learning/2024/07/09/local-llms-with-matlab/?s_eid=psm_bl&source=15308](local-llm-matlab article)
+[local-llm-matlab-article](https://blogs.mathworks.com/deep-learning/2024/07/09/local-llms-with-matlab/?s_eid=psm_bl&source=15308)
 
-[https://github.com/matlab-deep-learning/llms-with-matlab/](github repo llms with matlab)
+[github repo llms matlab](https://github.com/matlab-deep-learning/llms-with-matlab/)
 
-[https://ollama.com/download](Ollama download)
+[ollama dwnload](https://ollama.com/download)
 
-[https://github.com/matlab-deep-learning/llms-with-matlab/blob/main/doc/Ollama.md](
-llms with matlab - ollama doc)
+[llms matlab ollama doc](https://github.com/matlab-deep-learning/llms-with-matlab/blob/main/doc/Ollama.md)
 
 ## Set up Ollama Server
 
-```
+```bash
 curl -fsSL https://ollama.com/install.sh | sh
 ```
-I did this in terminal. No issues.
-
 ## Pull Model into Server
 
-```matlab
+```bash
 ollama pull llama3
 ```
+
+## Run chat
+```bash
+ollama run llama3
+```
 - Did this in terminal as well. Went fine. Can also pull llama2, codellama, phi3, mistral, gemma (probably others).
+
+## Running in MATLAB
+This part was rough. I had to clone the llms-with-matlab repo, then I had a bunch of issues. My GPU is AMD Radeon so ollama didn't like that. I had to mess with openCL and ROCm to make sure that was all working properly. Once working and my GPU was recognized and utilized, the following command starts the ollama server:
+```bash
+HSA_OVERRIDE_GFX_VERSION=10.3.0 ollama serve
+```
+This made it work very well. Following this, I pull the model:
+```bash
+ollama pull llama3
+```
+
+## Setting path in MATLAB
+I had to set the path in matlab to make sure the repo commands and everything were available.
+```matlab
+addpath('/path/to/llms-with-matlab');
+savepath;
+```
+
+## Running ollamaChat
+After the above was settled, the chat worked well.
+```matlab
+chat = ollamaChat("llama3");
+response = generate(chat, "Prompt goes here");
+disp(response);
+```
+
+## The rest of doc is just learning for now
+
 - For the following parts, I assume I do all of it in MATLAB. I'm running on Ubuntu and just using matlab -nodesktop so hopefully this goes well.
 
 

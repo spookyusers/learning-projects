@@ -57,6 +57,9 @@ while true
         messagesSizes(1) = [];
     end
 
+% Add a 2-second delay to ensure server is ready
+pause(2);
+
 % Add the new message to the session and generate a new response.
     messages = addUserMessage(messages, query);
     [text, response] = generate(chat, messages);
